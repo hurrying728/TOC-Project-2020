@@ -24,16 +24,23 @@ def send_button_message(reply_token, text, buttons):
         template = ButtonsTemplate(
             title = text,
             text = text,
-            actions = [
-                MessageTemplateAction(
-                    label = buttons[0],
-                    text = "go to " + buttons[0]
-                ),
-                MessageTemplateAction(
-                    label = buttons[1],
-                    text = "go to " + buttons[1]
+            for buttons in buttons
+                actions.append(
+                    MessageTemplateAction(
+                        label = buttons,
+                        text = buttons
+                    )
                 )
-            ]
+         #   actions = [
+         #       MessageTemplateAction(
+          #          label = buttons[0],
+           #         text = "go to " + buttons[0]
+            #    ),
+             #   MessageTemplateAction(
+             #       label = buttons[1],
+              #      text = "go to " + buttons[1]
+               # )
+           # ]
         )
     )
     line_bot_api = LineBotApi(channel_access_token)
