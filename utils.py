@@ -24,7 +24,7 @@ def send_button_message(reply_token, text, buttons):
         template = ButtonsTemplate(
             title = text,
             text = text,
-            for buttons in buttons
+            for buttons in buttons:
                 actions.append(
                     MessageTemplateAction(
                         label = buttons,
