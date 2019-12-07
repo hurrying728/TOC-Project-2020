@@ -21,6 +21,7 @@ def send_image_url(id, img_url):
 def send_button_message(reply_token, text, buttons):
     buttons_template = TemplateSendMessage(
         alt_text = text,
+        actions = []
         template = ButtonsTemplate(
             title = text,
             text = text,
