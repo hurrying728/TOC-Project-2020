@@ -1,4 +1,5 @@
 from transitions.extensions import GraphMachine
+from linebot.models import *
 
 from utils import send_text_message
 
