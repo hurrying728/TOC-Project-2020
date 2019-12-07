@@ -27,11 +27,11 @@ def send_button_message(reply_token, text, buttons):
             actions = [
                 MessageTemplateAction(
                     label = buttons[0],
-                    text = buttons[0]
+                    text = "go to " + buttons[0]
                 ),
                 MessageTemplateAction(
                     label = buttons[1],
-                    text = buttons[1]
+                    text = "go to " + buttons[1]
                 )
             ]
         )
