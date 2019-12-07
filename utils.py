@@ -17,7 +17,26 @@ def send_text_message(reply_token, text):
 """
 def send_image_url(id, img_url):
     pass
-
-def send_button_message(id, text, buttons):
-    pass
 """
+def send_button_message(reply_token, text, buttons):
+    buttons_template = TemplateSendMessage(
+        alt_text = text,
+        template = ButtonsTemplate(
+            title = text,
+            text = text,
+            actions = [
+                MessageTemplateAction(
+                    label = buttons[0],
+                    text = buttons[0]
+                ),
+                MessageTemplateAction(
+                    label = buttons[1],
+                    text = buttons[1]
+                )
+            ]
+        )
+    )
+    line_bot_api = LineBotApi(channel_access_token)
+    line_bot_api.reply_message(reply_token, buttons_template)
+
+    return "OK"
