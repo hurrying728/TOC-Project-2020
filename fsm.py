@@ -29,6 +29,25 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger state1")
 
+        buttons_template = TemplateSendMessage(
+            alt_text = 'Buttons Template',
+            template = ButtonsTemplate(
+                title = '這是ButtonsTemplate',
+                text='ButtonsTemplate可以傳送text,uri',
+                actions = [
+                    MessageTemplateAction(
+                        label = 'state3',
+                        text = 'go to state3'
+                    ),
+                    MessageTemplateAction(
+                        label = 'state4',
+                        text = 'go to state4'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(reply_token, buttons_template)
+
     def on_exit_state1(self, event):
         print("Leaving state1")
 
