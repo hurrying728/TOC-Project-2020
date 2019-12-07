@@ -28,22 +28,11 @@ def send_button_message(reply_token, text, buttons):
             )
         )
     buttons_template = TemplateSendMessage(
-        alt_text = text,
-        #actions = []
+        alt_text = text[0],
         template = ButtonsTemplate(
-            title = text,
-            text = text,
+            title = text[0],
+            text = text[1],
             actions = act
-         #   actions = [
-         #       MessageTemplateAction(
-          #          label = buttons[0],
-           #         text = "go to " + buttons[0]
-            #    ),
-             #   MessageTemplateAction(
-             #       label = buttons[1],
-              #      text = "go to " + buttons[1]
-               # )
-           # ]
         )
     )
     line_bot_api = LineBotApi(channel_access_token)

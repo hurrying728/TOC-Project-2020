@@ -18,17 +18,20 @@ class TocMachine(GraphMachine):
 
     def is_going_to_state3(self, event):
         text = event.message.text
-        return text.lower() == "go to state3"
+        return text == "使用分享器"
 
     def is_going_to_state4(self, event):
         text = event.message.text
-        return text.lower() == "go to state4"
+        return text == "無使用分享器"
 
     def on_enter_state1(self, event):
         print("I'm entering state1")
 
+        text = ["尚未開放註冊宿網","請選擇連接宿網之方式"] 
+        buttons = ["使用分享器", "無使用分享器"]
+
         reply_token = event.reply_token
-        send_button_message(reply_token, "test", ["go to state3", "go to state4"])
+        send_button_message(reply_token, text, buttons)
 
     def on_exit_state1(self, event):
         print("Leaving state1")
