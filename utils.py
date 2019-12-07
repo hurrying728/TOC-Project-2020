@@ -2,7 +2,7 @@ import os
 
 from linebot import LineBotApi, WebhookParser
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-from linebot.models import TemplateSendMessage
+from linebot.models import TemplateSendMessage, ButtonsTemplate, MessageTemplateAction
 
 channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", None)
 
