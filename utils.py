@@ -19,19 +19,21 @@ def send_image_url(id, img_url):
     pass
 """
 def send_button_message(reply_token, text, buttons):
+    actions = []
+    for buttons in buttons:
+        actions.append(
+            MessageTemplateAction(
+                label = buttons,
+                text = buttons
+            )
+        )
     buttons_template = TemplateSendMessage(
         alt_text = text,
-        actions = []
+        #actions = []
         template = ButtonsTemplate(
             title = text,
             text = text,
-            for buttons in buttons:
-                actions.append(
-                    MessageTemplateAction(
-                        label = buttons,
-                        text = buttons
-                    )
-                )
+            actions
          #   actions = [
          #       MessageTemplateAction(
           #          label = buttons[0],

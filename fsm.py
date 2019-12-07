@@ -28,7 +28,7 @@ class TocMachine(GraphMachine):
         print("I'm entering state1")
 
         reply_token = event.reply_token
-        send_button_message(reply_token, "test", ["state3", "state4"])
+        send_button_message(reply_token, "test", ["go to state3", "go to state4"])
 
     def on_exit_state1(self, event):
         print("Leaving state1")
