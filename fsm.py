@@ -46,11 +46,11 @@ class TocMachine(GraphMachine):
 
     def is_going_to_state9(self, event):
         text = event.message.text
-        return text == "黃色驚嘆號" or text == "仍無法連線" or text == "欲與室友交換網孔"
+        return text == "黃色驚嘆號" or text == "仍無法連線" or text == "欲與室友交換網孔" or text == "否"
 
     def is_going_to_state10(self, event):
         text = event.message.text
-        return text == "網孔已被註冊"
+        return text == "是"
 
     def is_going_to_final(self, event):
         text = event.message.text
@@ -147,7 +147,7 @@ class TocMachine(GraphMachine):
         print("I'm entering state7")
 
         text = ["網孔已被註冊","請先確認是否為室友註冊"] 
-        buttons = ["是，此網孔已被室友先行註冊", "否，室友皆無註冊過此網孔"]
+        buttons = ["是", "否"]
 
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
