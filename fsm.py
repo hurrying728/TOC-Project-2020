@@ -177,10 +177,8 @@ class TocMachine(GraphMachine):
     def on_enter_final(self, event):
         print("I'm entering final")
 
-        text = ["感謝您的使用！\n若有其他疑問，請致電計網中心分機61010詢問\n重新使用請輸入\"開始使用\""] 
-
         reply_token = event.reply_token
-        send_text_message(reply_token, text)
+        send_text_message(reply_token, "感謝您的使用！\n若有其他疑問，請致電計網中心分機61010詢問\n重新使用請輸入\"開始使用\"") 
         self.go_back()
 
     def on_exit_final(self):
