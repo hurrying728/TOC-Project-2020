@@ -182,10 +182,8 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False and machine.state == "user":
-            text = ["您好！",
-                    "歡迎使用宿網小幫手，若要使用請點選下方按鈕，謝謝！"]
-            buttons = ["開始使用"]
-            send_buttons_message(event.reply_token, text, buttons)
+            text = "您好！\n歡迎使用宿網小幫手，請輸入\"開始使用\"以啟用服務，謝謝！"
+            send_text_message(event.reply_token, text)
         elif response == False:
             send_text_message(event.reply_token, "請點選上方訊息之按鈕\n或輸入\"開始使用\"以重新啟用服務，謝謝！")
 
