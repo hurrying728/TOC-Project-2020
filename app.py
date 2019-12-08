@@ -8,24 +8,31 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
-from utils import send_text_message
+from utils import send_text_message, send_button_message
 
 load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2","state3", "state4", "state5", "state6", "state6a", 
+    states=["user", "start", "state1", "state2",
+            "state3", "state4", "state5", "state6", "state6a", 
             "state7", "state8", "state9", "state10", "final"],
     transitions=[
         {
             "trigger": "advance",
-            "source": "user",
+            "source": states,
+            "dest": "start",
+            "conditions": "is_going_to_start",
+        },
+        {
+            "trigger": "advance",
+            "source": "start",
             "dest": "state1",
             "conditions": "is_going_to_state1",
         },
         {
             "trigger": "advance",
-            "source": "user",
+            "source": "start",
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },

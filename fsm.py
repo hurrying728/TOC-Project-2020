@@ -8,6 +8,10 @@ class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
 
+    def is_going_to_start(self, event):
+        text = event.message.text
+        return text == "開始使用"
+
     def is_going_to_state1(self, event):
         text = event.message.text
         return text == "尚未開始註冊宿網"
@@ -55,6 +59,18 @@ class TocMachine(GraphMachine):
     def is_going_to_final(self, event):
         text = event.message.text
         return text == "我知道了" or text == "連線成功"
+
+    def on_enter_start(self, event):
+        print("I'm entering start")
+
+        text = ["請選擇是否已開始註冊宿網", "是否已開始註冊可於計網中心首頁公告確認"] 
+        buttons = ["已開始註冊宿網", "尚未開始註冊宿網"]
+
+        reply_token = event.reply_token
+        send_button_message(reply_token, text, buttons)
+
+    def on_exit_start(self, event):
+        print("Leaving start")
 
     def on_enter_state1(self, event):
         print("I'm entering state1")
@@ -134,7 +150,7 @@ class TocMachine(GraphMachine):
         print("I'm entering state6a")
 
         text = ["尚未註冊",
-                "請輸入網址http://dorm.cc.ncku.edu.tw/進入宿網管理系統進行註冊\n注意：開頭是http沒有s！"]
+                "請輸入網址http://dorm.cc.ncku.edu.tw/進行註冊\n注意：開頭是http沒有s！"]
         buttons = ["連線成功", "仍無法連線"]
 
         reply_token = event.reply_token
