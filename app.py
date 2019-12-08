@@ -20,7 +20,9 @@ machine = TocMachine(
     transitions=[
         {
             "trigger": "advance",
-            "source": "user",
+            "source": ["user", "start", "state1", "state2",
+                       "state3", "state4", "state5", "state6", "state6a", 
+                       "state7", "state8", "state9", "state10", "final"],
             "dest": "start",
             "conditions": "is_going_to_start",
         },
