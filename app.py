@@ -174,8 +174,7 @@ def webhook_handler():
             buttons = ["開始使用"]
             send_buttons_message(event.reply_token, text, buttons)
         elif response == False:
-            send_text_message(event.reply_token, "請點選上方訊息之按鈕
-                    或輸入\"開始使用\"以重新啟用服務，謝謝！")
+            send_text_message(event.reply_token, "請點選上方訊息之按鈕\n或輸入\"開始使用\"以重新啟用服務，謝謝！")
 
     return "OK"
 

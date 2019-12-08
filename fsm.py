@@ -80,8 +80,7 @@ class TocMachine(GraphMachine):
         print("I'm entering state3")
 
         text = ["請確認分享器設定如下:", 
-                "1. DHCP(自動取得IP&DNS)
-                2. Router mode(通常是預設值)"]
+                "1. DHCP(自動取得IP&DNS)\n2. Router mode(通常是預設值)"]
         buttons = ["連線成功", "仍無法連線"]
 
         reply_token = event.reply_token
@@ -118,11 +117,8 @@ class TocMachine(GraphMachine):
         print("I'm entering state6")
 
         text = ["尚未註冊",
-                "請輸入網址http://dorm.cc.ncku.edu.tw/進入宿網管理系統進行註冊
-                注意：
-                請直接使用學校宿網連線進入宿網管理系統，
-                並確認無連上個人行動熱點等wifi，
-                以免無法開啟宿網管理系統！"] 
+                "請輸入網址http://dorm.cc.ncku.edu.tw/進入宿網管理系統進行註冊\n注意：
+                請直接使用學校宿網連線進入宿網管理系統，\n並確認無連上個人行動熱點等wifi，\n以免無法開啟宿網管理系統！"] 
         buttons = ["連線成功", "仍無法連線"]
 
         reply_token = event.reply_token
@@ -183,8 +179,7 @@ class TocMachine(GraphMachine):
         print("I'm entering final")
 
         text = ["感謝您的使用！",
-                "若有其他疑問，請致電計網中心分機61010詢問
-                重新使用請輸入\"開始使用\"或點選下方按鈕"] 
+                "若有其他疑問，請致電計網中心分機61010詢問\n重新使用請輸入\"開始使用\"或點選下方按鈕"] 
         buttons = ["開始使用"]
 
         reply_token = event.reply_token
