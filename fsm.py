@@ -157,7 +157,7 @@ class TocMachine(GraphMachine):
         buttons = ["我知道了"]
 
         reply_token = event.reply_token
-        send_text_message(reply_token, text, buttons)
+        send_button_message(reply_token, text, buttons)
 
     def on_exit_state9(self, event):
         print("Leaving state9")
