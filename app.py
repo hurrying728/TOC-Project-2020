@@ -14,7 +14,8 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2", "state3", "state4"],
+    states=["user", "state1", "state2","state3", "state4", "state5", "state6", "state7",
+            "state8", "state9", "state10", "final"],
     transitions=[
         {
             "trigger": "advance",
@@ -40,7 +41,59 @@ machine = TocMachine(
             "dest": "state4",
             "conditions": "is_going_to_state4",
         },
-        {"trigger": "go_back", "source": ["state2", "state3", "state4"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "state2",
+            "dest": "state5",
+            "conditions": "is_going_to_state5",
+        },
+        {
+            "trigger": "advance",
+            "source": ["state2", "state10"],
+            "dest": "state6",
+            "conditions": "is_going_to_state6",
+        },
+        {
+            "trigger": "advance",
+            "source": "state2",
+            "dest": "state7",
+            "conditions": "is_going_to_state7",
+        },
+        {
+            "trigger": "advance",
+            "source": "state3",
+            "dest": "state9",
+            "conditions": "is_going_to_state9",
+        },
+        {
+            "trigger": "advance",
+            "source": ["state4", "state5"],
+            "dest": "state8",
+            "conditions": "is_going_to_state8",
+        },
+        {
+            "trigger": "advance",
+            "source": ["state4", "state5", "state6", "state7"],
+            "dest": "state9",
+            "conditions": "is_going_to_state9",
+        },
+        {
+            "trigger": "advance",
+            "source": "state7",
+            "dest": "state10",
+            "conditions": "is_going_to_state10",
+        },
+        {
+            "trigger": "advance",
+            "source": ["state3", "state8", "state9", "state10"],
+            "dest": "final",
+            "conditions": "is_going_to_final",
+        },
+        {
+            "trigger": "go_back", 
+            "source": "final", 
+            "dest": "user"
+        },
     ],
     initial="user",
     auto_transitions=False,
@@ -115,8 +168,14 @@ def webhook_handler():
         print(f"\nFSM STATE: {machine.state}")
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
-        if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+        if response == False and machine.state == "user":
+            text = ["您好！",
+                    "歡迎使用宿網小幫手，若要使用請點選下方按鈕，謝謝！"]
+            buttons = ["開始使用"]
+            send_buttons_message(event.reply_token, text, buttons)
+        elif response == False
+            send_text_message(event.reply_token, "請點選上方訊息之按鈕
+                    或輸入\"開始使用\"以重新啟用服務，謝謝！")
 
     return "OK"
 
