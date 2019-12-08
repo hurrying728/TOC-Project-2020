@@ -73,7 +73,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
 
-    def on_exit_state2(self):
+    def on_exit_state2(self, event):
         print("Leaving state2")
 
     def on_enter_state3(self, event):
@@ -86,7 +86,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
 
-    def on_exit_state3(self):
+    def on_exit_state3(self, event):
         print("Leaving state3")
 
     def on_enter_state4(self, event):
@@ -98,7 +98,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
 
-    def on_exit_state4(self):
+    def on_exit_state4(self, event):
         print("Leaving state4")
 
     def on_enter_state5(self, event):
@@ -183,6 +183,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
+        self.go_back()
 
     def on_exit_final(self, event):
         print("Leaving final")
