@@ -117,8 +117,7 @@ class TocMachine(GraphMachine):
         print("I'm entering state6")
 
         text = ["尚未註冊",
-                "請輸入網址http://dorm.cc.ncku.edu.tw/進入宿網管理系統進行註冊\n注意：
-                請直接使用學校宿網連線進入宿網管理系統，\n並確認無連上個人行動熱點等wifi，\n以免無法開啟宿網管理系統！"] 
+                "請輸入網址http://dorm.cc.ncku.edu.tw/進入宿網管理系統進行註冊\n注意：\n請直接使用學校宿網連線進入宿網管理系統，\n並確認無連上個人行動熱點等wifi，\n以免無法開啟宿網管理系統！"] 
         buttons = ["連線成功", "仍無法連線"]
 
         reply_token = event.reply_token
