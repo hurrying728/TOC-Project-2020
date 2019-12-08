@@ -32,6 +32,10 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "未註冊" or text == "已更換至未註冊網孔"
 
+    def is_going_to_state6a(self, event):
+        text = event.message.text
+        return text == "仍無法連線"
+
     def is_going_to_state7(self, event):
         text = event.message.text
         return text == "網孔已被註冊"
@@ -117,14 +121,27 @@ class TocMachine(GraphMachine):
         print("I'm entering state6")
 
         text = ["尚未註冊",
-                "請輸入網址http://dorm.cc.ncku.edu.tw/進入宿網管理系統進行註冊\n注意：\n請直接使用學校宿網連線進入宿網管理系統，\n並確認無連上個人行動熱點等wifi，\n以免無法開啟宿網管理系統！"] 
+                "請直接使用學校宿網連線進入宿網管理系統，\n並確認無連上個人行動熱點等wifi，\n以免無法開啟宿網管理系統！"] 
         buttons = ["連線成功", "仍無法連線"]
 
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
 
-    def on_exit_state6(self, event):
-        print("Leaving state6")
+    def on_exit_state5(self, event):
+        print("Leaving state5")
+
+    def on_enter_state6a(self, event):
+        print("I'm entering state6a")
+
+        text = ["尚未註冊",
+                "請輸入網址http://dorm.cc.ncku.edu.tw/進入宿網管理系統進行註冊\n注意：開頭是http沒有s！"]
+        buttons = ["連線成功", "仍無法連線"]
+
+        reply_token = event.reply_token
+        send_button_message(reply_token, text, buttons)
+
+    def on_exit_state6a(self, event):
+        print("Leaving state6a")
 
     def on_enter_state7(self, event):
         print("I'm entering state7")

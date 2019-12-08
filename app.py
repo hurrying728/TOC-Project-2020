@@ -73,7 +73,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["state4", "state5", "state6", "state7"],
+            "source": ["state4", "state5", "state6a", "state7"],
             "dest": "state9",
             "conditions": "is_going_to_state9",
         },
@@ -85,7 +85,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["state3", "state8", "state9", "state10"],
+            "source": ["state3", "state6", "state6a", "state8", "state9", "state10"],
             "dest": "final",
             "conditions": "is_going_to_final",
         },
