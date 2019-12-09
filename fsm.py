@@ -8,8 +8,8 @@ from oauth2client.service_account import ServiceAccountCredentials as SAC
 from utils import send_text_message
 from utils import send_button_message
 
-GDriveJSON = "NckudormhelperReply-3d48be03dd5a.json"
-GSpreadSheet = "NCKUdormHelper_reply"
+GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
+GSpreadSheet = 'NCKUdormHelper_reply'
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -29,7 +29,8 @@ class TocMachine(GraphMachine):
 
     def is_going_to_use_router(self, event):
         text = event.message.text
-        scope = ['https://spreadsheets.google.com/feeds']
+        scope = ['https://spreadsheets.google.com/feeds', 
+                 'https://www.googleapis.com/auth/drive']
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
         worksheet = gc.open(GSpreadSheet).sheet1
