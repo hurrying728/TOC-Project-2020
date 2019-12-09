@@ -182,7 +182,7 @@ def webhook_handler():
         if not isinstance(event.message.text, str):
             continue
 
-        user_id = event.source.userId
+        user_id = event.source.user_id
         if user_id_list.index(user_id) == -1:
             user_id_list.append(user_id)
             machine_list.append(machine)
