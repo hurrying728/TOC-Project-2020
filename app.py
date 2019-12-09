@@ -183,7 +183,7 @@ def webhook_handler():
             continue
 
         user_id = event.source.userId
-        if user_id_list.index(user_id) == -1
+        if user_id_list.index(user_id) == -1:
             user_id_list.append(user_id)
             machine_list.append(machine)
 
