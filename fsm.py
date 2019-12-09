@@ -8,10 +8,14 @@ from oauth2client.service_account import ServiceAccountCredentials as SAC
 from utils import send_text_message
 from utils import send_button_message
 
-GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
-GSpreadSheet = 'NCKUdormHelper_reply'
+#GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
+#GSpreadSheet = 'NCKUdormHelper_reply'
 
 class TocMachine(GraphMachine):
+
+    GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
+    GSpreadSheet = 'NCKUdormHelper_reply'
+
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
 
