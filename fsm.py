@@ -63,7 +63,7 @@ class TocMachine(GraphMachine):
         temp = text.split("\n")
         s = []
         for t in temp:
-            s.append(t.split("："))
+            s.append(t.split("：")[1])
         print(s)
         global GDriveJSON
         global GSpreadSheet
