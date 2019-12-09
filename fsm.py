@@ -58,6 +58,19 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "否"
 
+    def is_going_to_wait(self, event):
+        text = event.message.text
+
+        global GDriveJSON
+        global GSpreadSheet
+        scope = ['https://spreadsheets.google.com/feeds',
+                 'https://www.googleapis.com/auth/drive']
+        key = SAC.from_json_keyfile_name(GDriveJSON, scope)
+        gc = gspread.authorize(key)
+        worksheet = gc.open(GSpreadSheet).sheet1
+        worksheet.append_row((datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), text))
+        return True
+
     def is_going_to_change(self, event):
         text = event.message.text
         return text == "紅色叉叉"
@@ -204,7 +217,7 @@ class TocMachine(GraphMachine):
         text = "將交由負責人處理，請複製下列格式回覆訊息：\n姓名：\n學號：\n連絡電話：\n寢室：\nIP：(若是要交換兩個ip的註冊訊息請以/隔開不同ip)\n備註：(若無請填無)" 
         reply_token = event.reply_token
         send_text_message(reply_token, text)
-        
+
         global GDriveJSON
         global GSpreadSheet
         scope = ['https://spreadsheets.google.com/feeds',

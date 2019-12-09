@@ -76,6 +76,12 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
+            "source": "reply",
+            "dest": "final",
+            "conditions": "is_going_to_wait",
+        },
+        {
+            "trigger": "advance",
             "source": "use_router",
             "dest": "call",
             "conditions": "is_going_to_call",
@@ -113,7 +119,7 @@ machine = TocMachine(
         {
             "trigger": "advance",
             "source": ["use_router", "not_register", "check_wifi", "check_dns", 
-                       "reply", "change", "call", "find_another"],
+                       "change", "call", "find_another"],
             "dest": "final",
             "conditions": "is_going_to_final",
         },
