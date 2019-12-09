@@ -52,7 +52,7 @@ class TocMachine(GraphMachine):
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
         worksheet = gc.open(GSpreadSheet).sheet1
-        worksheet.append_row((datetime.datetime.now(), text))
+        worksheet.append_row((datetime.strftime(datetime.now(), '%Y-%m-%d'), text))
         return text == "已註冊"
 
     def is_going_to_not_register(self, event):
