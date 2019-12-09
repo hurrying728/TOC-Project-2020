@@ -47,7 +47,8 @@ class TocMachine(GraphMachine):
         text = event.message.text
         GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
         GSpreadSheet = 'NCKUdormHelper_reply'
-        scope = ['https://spreadsheets.google.com/feeds']
+        scope = ['https://spreadsheets.google.com/feeds',
+                 'https://www.googleapis.com/auth/drive']
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
         worksheet = gc.open(GSpreadSheet).sheet1
