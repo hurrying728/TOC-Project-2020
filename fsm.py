@@ -12,10 +12,6 @@ from utils import send_button_message
 #GSpreadSheet = 'NCKUdormHelper_reply'
 
 class TocMachine(GraphMachine):
-
-    GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
-    GSpreadSheet = 'NCKUdormHelper_reply'
-
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
 
@@ -33,6 +29,8 @@ class TocMachine(GraphMachine):
 
     def is_going_to_use_router(self, event):
         text = event.message.text
+        GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
+        GSpreadSheet = 'NCKUdormHelper_reply'
         scope = ['https://spreadsheets.google.com/feeds', 
                  'https://www.googleapis.com/auth/drive']
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
@@ -47,6 +45,8 @@ class TocMachine(GraphMachine):
 
     def is_going_to_already_register(self, event):
         text = event.message.text
+        GDriveJSON = 'NckudormhelperReply-3d48be03dd5a.json'
+        GSpreadSheet = 'NCKUdormHelper_reply'
         scope = ['https://spreadsheets.google.com/feeds']
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
