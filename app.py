@@ -70,7 +70,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": "occupied",
+            "source": ["occupied", "find_another"],
             "dest": "reply",
             "conditions": "is_going_to_reply",
         },

@@ -56,7 +56,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_reply(self, event):
         text = event.message.text
-        return text == "否"
+        return text == "否" or text == "欲與室友交換網孔"
 
     def is_going_to_wait(self, event):
         text = event.message.text
