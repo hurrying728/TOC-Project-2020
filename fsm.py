@@ -36,7 +36,7 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "未註冊" or text == "已更換至未註冊網孔"
 
-    def is_going_to_check_url(self, event):
+    def is_going_to_check_wifi(self, event):
         text = event.message.text
         return text == "仍無法連線"
 
@@ -68,7 +68,7 @@ class TocMachine(GraphMachine):
         print("I'm entering start")
 
         text = ["請選擇是否已開始註冊宿網", "是否已開始註冊可於計網中心首頁公告確認"] 
-        buttons = ["已開始註冊宿網", "尚未開始註冊宿網"]
+        buttons = ["尚未開始註冊宿網", "已開始註冊宿網"]
 
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
@@ -141,7 +141,7 @@ class TocMachine(GraphMachine):
         print("I'm entering not_register")
 
         text = ["尚未註冊",
-                "請直接使用學校宿網連線進入宿網管理系統，\n並確認無連上個人行動熱點等wifi"] 
+                "請輸入網址http://dorm.cc.ncku.edu.tw/進行註冊\n注意：開頭是http沒有s！"] 
         buttons = ["連線成功", "仍無法連線"]
 
         reply_token = event.reply_token
@@ -150,18 +150,18 @@ class TocMachine(GraphMachine):
     def on_exit_already_register(self, event):
         print("Leaving already_register")
 
-    def on_enter_check_url(self, event):
-        print("I'm entering check_url")
+    def on_enter_check_wifi(self, event):
+        print("I'm entering check_wifi")
 
         text = ["尚未註冊",
-                "請輸入網址http://dorm.cc.ncku.edu.tw/進行註冊\n注意：開頭是http沒有s！"]
+                "請直接使用學校宿網連線進入宿網管理系統，並確認無連上個人行動熱點等wifi"]
         buttons = ["連線成功", "仍無法連線"]
 
         reply_token = event.reply_token
         send_button_message(reply_token, text, buttons)
 
-    def on_exit_check_url(self, event):
-        print("Leaving check_url")
+    def on_exit_check_wifi(self, event):
+        print("Leaving check_wifi")
 
     def on_enter_check_dns(self, event):
         print("I'm entering check_dns")
