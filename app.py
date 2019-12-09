@@ -16,7 +16,7 @@ load_dotenv()
 machine = TocMachine(
     states=["user", "start", "before_register", "after_register",
             "use_router", "not_use_router", "already_register", "not_register", "check_wifi", 
-            "check_dns", "occupied", "change", "call", "find_another", "final"],
+            "check_dns", "occupied", "reply", "change", "call", "find_another", "final"],
     transitions=[
         {
             "trigger": "advance",
@@ -70,6 +70,12 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
+            "source": "occupied",
+            "dest": "reply",
+            "conditions": "is_going_to_reply",
+        },
+        {
+            "trigger": "advance",
             "source": "use_router",
             "dest": "call",
             "conditions": "is_going_to_call",
@@ -94,7 +100,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["not_use_router", "already_register", "check_dns", "occupied"],
+            "source": ["not_use_router", "already_register", "check_dns"],
             "dest": "call",
             "conditions": "is_going_to_call",
         },
@@ -106,7 +112,8 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["use_router", "not_register", "check_wifi", "check_dns", "change", "call", "find_another"],
+            "source": ["use_router", "not_register", "check_wifi", "check_dns", 
+                       "reply", "change", "call", "find_another"],
             "dest": "final",
             "conditions": "is_going_to_final",
         },

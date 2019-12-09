@@ -36,14 +36,6 @@ class TocMachine(GraphMachine):
 
     def is_going_to_already_register(self, event):
         text = event.message.text
-        global GDriveJSON #= 'NckudormhelperReply-3d48be03dd5a.json'
-        global GSpreadSheet #= 'NCKUdormHelper_reply'
-        scope = ['https://spreadsheets.google.com/feeds',
-                 'https://www.googleapis.com/auth/drive']
-        key = SAC.from_json_keyfile_name(GDriveJSON, scope)
-        gc = gspread.authorize(key)
-        worksheet = gc.open(GSpreadSheet).sheet1
-        worksheet.append_row((datetime.strftime(datetime.now(), '%Y-%m-%d'), text))
         return text == "已註冊"
 
     def is_going_to_not_register(self, event):
@@ -62,13 +54,17 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "網孔已被註冊"
 
+    def is_going_to_reply(self, event):
+        text = event.message.text
+        return text == "否"
+
     def is_going_to_change(self, event):
         text = event.message.text
         return text == "紅色叉叉"
 
     def is_going_to_call(self, event):
         text = event.message.text
-        return text == "黃色驚嘆號" or text == "仍無法連線" or text == "欲與室友交換網孔" or text == "否"
+        return text == "黃色驚嘆號" or text == "仍無法連線" or text == "欲與室友交換網孔"
 
     def is_going_to_find_another(self, event):
         text = event.message.text
@@ -201,6 +197,25 @@ class TocMachine(GraphMachine):
 
     def on_exit_occupied(self, event):
         print("Leaving occupied")
+
+    def on_enter_reply(self, event):
+        print("I'm entering reply")
+
+        text = "將交由負責人處理，請複製下列格式回覆訊息：\n姓名：\n學號：\n連絡電話：\n寢室：\nIP：(若是要交換兩個ip的註冊訊息請以/隔開不同ip)\n備註：(若無請填無)" 
+        reply_token = event.reply_token
+        send_text_message(reply_token, text, buttons)
+        
+        global GDriveJSON
+        global GSpreadSheet
+        scope = ['https://spreadsheets.google.com/feeds',
+                 'https://www.googleapis.com/auth/drive']
+        key = SAC.from_json_keyfile_name(GDriveJSON, scope)
+        gc = gspread.authorize(key)
+        worksheet = gc.open(GSpreadSheet).sheet1
+        worksheet.append_row((datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), event.message.text))
+
+    def on_exit_reply(self, event):
+        print("Leaving reply")
 
     def on_enter_change(self, event):
         print("I'm entering change")
