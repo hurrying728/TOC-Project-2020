@@ -42,6 +42,11 @@ class TocMachine(GraphMachine):
 
     def is_going_to_already_register(self, event):
         text = event.message.text
+        scope = ['https://spreadsheets.google.com/feeds']
+        key = SAC.from_json_keyfile_name(GDriveJSON, scope)
+        gc = gspread.authorize(key)
+        worksheet = gc.open(GSpreadSheet).sheet1
+        worksheet.append_row((datetime.datetime.now(), text))
         return text == "已註冊"
 
     def is_going_to_not_register(self, event):
