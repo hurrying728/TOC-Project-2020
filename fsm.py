@@ -3,6 +3,7 @@ from linebot.models import *
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials as SAC
+import pytz
 
 from utils import send_text_message
 from utils import send_button_message
@@ -64,7 +65,10 @@ class TocMachine(GraphMachine):
         s = []
         for t in temp:
             s.append(t.split("：")[1])
-        print(s)
+        
+        pytz.country_timezones('cn')
+        tz = pytz.timezone('Asia/Shanghai')
+
         global GDriveJSON
         global GSpreadSheet
         scope = ['https://spreadsheets.google.com/feeds',
@@ -72,7 +76,7 @@ class TocMachine(GraphMachine):
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
         worksheet = gc.open(GSpreadSheet).sheet1
-        worksheet.append_row((datetime.astimezone(pytz.timezone(offset = timedelta(hours = 8))).strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), s[0], s[1], s[2], s[3], s[4], s[5]))
+        worksheet.append_row(datetime.strftime(datetime.now(tz), '%Y-%m-%d %H:%M:%S'), s[0], s[1], s[2], s[3], s[4], s[5]))
         return True
 
     def is_going_to_change(self, event):
