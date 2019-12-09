@@ -184,10 +184,10 @@ def webhook_handler():
 
         user_id = event.source.user_id
         try:
-            if user_id_list.index(user_id) == -1:
-                user_id_list.append(user_id)
-                machine_list.append(machine)
+            user_machine = machine_list[user_id_list.index(user_id)]
         except ValueError:
+            user_id_list.append(user_id)
+            machine_list.append(machine)
             user_machine = machine_list[user_id_list.index(user_id)]
 
         print(f"\nFSM STATE: {user_machine.state}")
