@@ -60,6 +60,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_wait(self, event):
         text = event.message.text
+        text.split("：")
 
         global GDriveJSON
         global GSpreadSheet
@@ -68,7 +69,8 @@ class TocMachine(GraphMachine):
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
         worksheet = gc.open(GSpreadSheet).sheet1
-        worksheet.append_row((datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), text))
+        worksheet.append_row((datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), 
+            text[1], text[3], text[5], text[7], text[9], text[11]))
         return True
 
     def is_going_to_change(self, event):
