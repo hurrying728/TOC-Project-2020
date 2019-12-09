@@ -203,7 +203,7 @@ class TocMachine(GraphMachine):
     def on_enter_call(self, event):
         print("I'm entering call")
 
-        text = ["轉由專人服務", "請致電計網中心分機61010詢問，謝謝！"]
+        text = ["轉由專人服務", "請致電計網中心(06)2757575分機61010詢問，謝謝！"]
         buttons = ["我知道了"]
 
         reply_token = event.reply_token
@@ -228,7 +228,7 @@ class TocMachine(GraphMachine):
         print("I'm entering final")
 
         reply_token = event.reply_token
-        send_text_message(reply_token, "感謝您的使用！\n若有其他疑問，請致電計網中心分機61010詢問\n重新使用請輸入\"開始使用\"") 
+        send_text_message(reply_token, "感謝您的使用！\n若有其他疑問，請致電計網中心(06)2757575分機61010詢問\n重新使用請輸入\"開始使用\"") 
         self.go_back()
 
     def on_exit_final(self):
