@@ -203,7 +203,7 @@ def webhook_handler():
             text = "您好！\n歡迎使用宿網小幫手，請輸入\"開始使用\"以啟用服務，謝謝！"
             send_text_message(event.reply_token, text)
         elif response == False:
-            send_text_message(event.reply_token, "請點選上方訊息之按鈕\n或輸入\"開始使用\"以重新啟用服務，謝謝！")
+            send_text_message(event.reply_token, "輸入錯誤或閒置過久！\n請點選上方按鈕或輸入\"開始使用\"以重新啟用服務，謝謝！")
 
     return "OK"
 
