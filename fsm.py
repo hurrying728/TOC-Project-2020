@@ -72,7 +72,7 @@ class TocMachine(GraphMachine):
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
         worksheet = gc.open(GSpreadSheet).sheet1
-        worksheet.append_row((datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), 
+        worksheet.append_row((datetime.astimezone(timezone(offset = timedelta(hours = 8)).strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), 
             s[0], s[1], s[2], s[3], s[4], s[5]))
         return True
 
