@@ -1,6 +1,6 @@
 from transitions.extensions import GraphMachine
 from linebot.models import *
-from datetime import datetime import pytz
+from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials as SAC
 
