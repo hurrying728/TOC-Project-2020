@@ -1,8 +1,15 @@
 from transitions.extensions import GraphMachine
 from linebot.models import *
+import time
+import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials as SAC
 
 from utils import send_text_message
 from utils import send_button_message
+
+GDriveJSON = "NckudormhelperReply-3d48be03dd5a.json"
+GSpreadSheet = "NCKUdormHelper_reply"
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -22,6 +29,11 @@ class TocMachine(GraphMachine):
 
     def is_going_to_use_router(self, event):
         text = event.message.text
+        scope = ['https://spreadsheets.google.com/feeds']
+        key = SAC.from_json_keyfile_name(GDriveJSON, scope)
+        gc = gspread.authorize(key)
+        worksheet = gc.open(GSpreadSheet).sheet1
+        worksheet.append_row((datetime.datetime.now(), text))
         return text == "使用分享器"
 
     def is_going_to_not_use_router(self, event):
