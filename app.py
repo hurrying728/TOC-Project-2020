@@ -116,7 +116,8 @@ machine = TocMachine(
 )
 
 app = Flask(__name__, static_url_path="")
-
+machine_list = []
+user_id_list = []
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv("LINE_CHANNEL_SECRET", None)
@@ -180,10 +181,18 @@ def webhook_handler():
             continue
         if not isinstance(event.message.text, str):
             continue
-        print(f"\nFSM STATE: {machine.state}")
+
+        user_id = event.source.userId
+        if user_id_list.index(user_id) == -1
+            user_id_list.append(user_id)
+            machine_list.append(machine)
+
+        user_machine = machine_list[user_id_list.index(user_id)]
+
+        print(f"\nFSM STATE: {user_machine.state}")
         print(f"REQUEST BODY: \n{body}")
-        response = machine.advance(event)
-        if response == False and machine.state == "user":
+        response = user_machine.advance(event)
+        if response == False and user_machine.state == "user":
             text = "您好！\n歡迎使用宿網小幫手，請輸入\"開始使用\"以啟用服務，謝謝！"
             send_text_message(event.reply_token, text)
         elif response == False:
