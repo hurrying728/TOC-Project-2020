@@ -40,6 +40,10 @@ class TocMachine(GraphMachine):
         text = event.message.text
         return text == "仍無法連線"
 
+    def is_going_to_check_dns(self, event):
+        text = event.message.text
+        return text == "仍無法連線"
+
     def is_going_to_occupied(self, event):
         text = event.message.text
         return text == "網孔已被註冊"
@@ -158,6 +162,19 @@ class TocMachine(GraphMachine):
 
     def on_exit_check_url(self, event):
         print("Leaving check_url")
+
+    def on_enter_check_dns(self, event):
+        print("I'm entering check_dns")
+
+        text = ["設定確認",
+                "1. DNS&IP自動取得\n2. 關閉proxy及vpn"]
+        buttons = ["連線成功", "仍無法連線"]
+
+        reply_token = event.reply_token
+        send_button_message(reply_token, text, buttons)
+
+    def on_exit_check_dns(self, event):
+        print("Leaving check_dns")
 
     def on_enter_occupied(self, event):
         print("I'm entering occupied")

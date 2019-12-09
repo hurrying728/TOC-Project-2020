@@ -16,13 +16,13 @@ load_dotenv()
 machine = TocMachine(
     states=["user", "start", "before_register", "after_register",
             "use_router", "not_use_router", "already_register", "not_register", "check_url", 
-            "occupied", "change", "call", "find_another", "final"],
+            "check_dns", "occupied", "change", "call", "find_another", "final"],
     transitions=[
         {
             "trigger": "advance",
             "source": ["user", "start", "before_register", "after_register",
                        "use_router", "not_use_router", "already_register", "not_register", "check_url", 
-                       "occupied", "change", "call", "find_another", "final"],
+                       "check_dns", "occupied", "change", "call", "find_another", "final"],
             "dest": "start",
             "conditions": "is_going_to_start",
         },
@@ -88,7 +88,13 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["not_use_router", "already_register", "check_url", "occupied"],
+            "source": "check_url",
+            "dest": "check_dns",
+            "conditions": "is_going_to_check_dns",
+        },
+        {
+            "trigger": "advance",
+            "source": ["not_use_router", "already_register", "check_dns", "occupied"],
             "dest": "call",
             "conditions": "is_going_to_call",
         },
@@ -100,7 +106,7 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": ["use_router", "not_register", "check_url", "change", "call", "find_another"],
+            "source": ["use_router", "not_register", "check_url", "check_dns", "change", "call", "find_another"],
             "dest": "final",
             "conditions": "is_going_to_final",
         },
