@@ -64,7 +64,7 @@ class TocMachine(GraphMachine):
         s = []
         for t in temp:
             s.append(t.split("："))
-
+        print(s)
         global GDriveJSON
         global GSpreadSheet
         scope = ['https://spreadsheets.google.com/feeds',
