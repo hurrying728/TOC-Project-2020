@@ -203,7 +203,7 @@ class TocMachine(GraphMachine):
 
         text = "將交由負責人處理，請複製下列格式回覆訊息：\n姓名：\n學號：\n連絡電話：\n寢室：\nIP：(若是要交換兩個ip的註冊訊息請以/隔開不同ip)\n備註：(若無請填無)" 
         reply_token = event.reply_token
-        send_text_message(reply_token, text, buttons)
+        send_text_message(reply_token, text)
         
         global GDriveJSON
         global GSpreadSheet
