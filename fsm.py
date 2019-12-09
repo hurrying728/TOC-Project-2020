@@ -1,6 +1,6 @@
 from transitions.extensions import GraphMachine
 from linebot.models import *
-from datetime import datetime
+from datetime import datetime import pytz
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials as SAC
 
@@ -72,7 +72,7 @@ class TocMachine(GraphMachine):
         key = SAC.from_json_keyfile_name(GDriveJSON, scope)
         gc = gspread.authorize(key)
         worksheet = gc.open(GSpreadSheet).sheet1
-        worksheet.append_row((datetime.astimezone(timezone(offset = timedelta(hours = 8))).strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), s[0], s[1], s[2], s[3], s[4], s[5]))
+        worksheet.append_row((datetime.astimezone(pytz.timezone(offset = timedelta(hours = 8))).strftime(datetime.now(), '%Y-%m-%d %H:%M:%S'), s[0], s[1], s[2], s[3], s[4], s[5]))
         return True
 
     def is_going_to_change(self, event):
