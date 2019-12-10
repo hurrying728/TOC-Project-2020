@@ -76,14 +76,56 @@ Or You can use [servo](http://serveo.net/) to expose local servers to the intern
 ## Usage
 The initial state is set to `user`.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
-
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: "開始使用"
+		* State: start
+		* Reply: "請選擇是否已開始註冊宿網" + 2 buttons["尚未開始註冊宿網", "已開始註冊宿網"]
+		
+* start
+	* Input: "尚未開始註冊宿網"
+		* State: before_register
+		* Reply: "請選擇連接宿網之方式" + 2 buttons["使用分享器", "無使用分享器"]
+	* Input: "已開始註冊宿網"
+		* State: after_register
+		* Reply: "選擇註冊情況" + 3 buttons["已註冊", "未註冊", "網孔已被註冊"]
+* before_register
+	* Input: "使用分享器"
+		* State: use_router
+		* Reply: "請確認分享器設定" + 2 buttons["連線成功", "仍無法連線"]
+	* Input: "無使用分享器"
+		* State: not_use_router
+		* Reply: "確認右下角連線圖示" + 2 buttons["紅色叉叉", "黃色驚嘆號"]
+* after_register
+	* Input: "已註冊"
+		* State: "already_register"
+		* Reply: "確認右下角連線圖示" + 2 buttons["紅色叉叉", "黃色驚嘆號"]
+	* Input: "未註冊"
+		* State: "not_register"
+		* Reply: "請至宿網管理系統註冊" + 2 buttons["連線成功", "仍無法連線"]
+	* Input: "網孔已被註冊"
+		* State: "occupied"
+		* Reply: "請確認是否為室友註冊" + 2 buttons["是", "否"]
+* use_router
+	* Input: "連線成功"
+		* State: final
+		* Reply: "感謝您的使用"
+	* Input: "仍無法連線"
+		* State: call
+		* Reply: "轉由專人服務"
+* not_use_router, already_register
+	* Input: "紅色叉叉"
+		* State: change
+		* Reply: "更換轉接頭/網路線測試"
+	* Input: "黃色驚嘆號"
+		* State: call
+		* Reply: "轉由專人服務"
+* use_router
+	* Input: "連線成功"
+		* State: final
+		* Reply: "感謝您的使用"
+	* Input: "仍無法連線"
+		* State: check_wifi
+		* Reply: "確認無連上無線網路" + 2 buttons["連線成功", "仍無法連線"]
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
