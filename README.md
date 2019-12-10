@@ -76,14 +76,22 @@ Or You can use [servo](http://serveo.net/) to expose local servers to the intern
 ## Usage
 The initial state is set to `user`.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
-
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: "開始使用"
+		* State: start
+		* Reply: "請選擇是否已開始註冊宿網" + 2 buttons["尚未開始註冊宿網", "已開始註冊宿網"]
+		
+* start
+	* Input: "尚未開始註冊宿網"
+		* State: before_register
+		* Reply: "請選擇連接宿網之方式" + 2 buttons["使用分享器", "無使用分享器"]
+	* Input: "已開始註冊宿網"
+		* State: after_register
+		* Reply: "" + 2 buttons["", ""]
+* before_register
+	* Input: "使用分享器"
+		* State: use_router
+		* Reply: "請確認分享器設定" + 2 buttons["連線成功", "仍無法連線"]
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
