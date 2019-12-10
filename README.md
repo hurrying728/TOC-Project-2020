@@ -112,6 +112,20 @@ The initial state is set to `user`.
 	* Input: "仍無法連線"
 		* State: call
 		* Reply: "轉由專人服務"
+* not_use_router, already_register
+	* Input: "紅色叉叉"
+		* State: change
+		* Reply: "更換轉接頭/網路線測試"
+	* Input: "黃色驚嘆號"
+		* State: call
+		* Reply: "轉由專人服務"
+* use_router
+	* Input: "連線成功"
+		* State: final
+		* Reply: "感謝您的使用"
+	* Input: "仍無法連線"
+		* State: check_wifi
+		* Reply: "確認無連上無線網路" + 2 buttons["連線成功", "仍無法連線"]
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
