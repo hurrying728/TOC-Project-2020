@@ -75,7 +75,7 @@ Or You can use [servo](http://serveo.net/) to expose local servers to the intern
 
 ## Usage
 ```sh
-協助成功大學學生初步排解使用宿網可能遇到的問題 兼 降低每年開學計網中心工讀生產生想辭職衝動的機率(X)
+協助成功大學學生初步排解使用宿網可能遇到的問題(X) 降低每年開學計網中心工讀生(我)產生想辭職衝動的機率(O)
 ```
 The initial state is set to `user`. When the state is set to `final`, goes back to `user`.
 
