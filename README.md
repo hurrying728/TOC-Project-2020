@@ -74,7 +74,7 @@ Or You can use [servo](http://serveo.net/) to expose local servers to the intern
 ![fsm](./img/show-fsm.png)
 
 ## Usage
-The initial state is set to `user`.
+The initial state is set to `user`. When the state is set to `final`, goes back to `user`.
 
 * user
 	* Input: "開始使用"
@@ -105,7 +105,7 @@ The initial state is set to `user`.
 	* Input: "網孔已被註冊"
 		* State: "occupied"
 		* Reply: "請確認是否為室友註冊" + 2 buttons["是", "否"]
-* use_router
+* use_router, check_dns
 	* Input: "連線成功"
 		* State: final
 		* Reply: "感謝您的使用"
@@ -119,14 +119,42 @@ The initial state is set to `user`.
 	* Input: "黃色驚嘆號"
 		* State: call
 		* Reply: "轉由專人服務"
-* use_router
+* not_register
 	* Input: "連線成功"
-		* State: final
+		* State: final 
 		* Reply: "感謝您的使用"
 	* Input: "仍無法連線"
 		* State: check_wifi
 		* Reply: "確認無連上無線網路" + 2 buttons["連線成功", "仍無法連線"]
-
+* check_wifi
+	* Input: "連線成功"
+		* State: final 
+		* Reply: "感謝您的使用"
+	* Input: "仍無法連線"
+		* State: check_dns
+		* Reply: "確認其他設定" + 2 buttons["連線成功", "仍無法連線"]
+* occupied
+	* Input: "是"
+		* State: find_another 
+		* Reply: "請更換至其他網孔" + 2 buttons["已更換至未註冊網孔", "欲與室友交換網孔"]
+	* Input: "否"
+		* State: reply
+		* Reply: "請依照下列格式回覆"
+* find_another
+	* Input: "已更換至未註冊網孔"
+		* State: not_register 
+		* Reply: "請至宿網管理系統註冊" + 2 buttons["連線成功", "仍無法連線"]
+	* Input: "欲與室友交換網孔"
+		* State: reply
+		* Reply: "請依照下列格式回覆"
+* reply
+	* Input: "姓名：..."
+		* State: final
+		* Reply: "感謝您的使用"
+* call
+	* Input: "我知道了"
+		* State: final
+		* Reply: "感謝您的使用"
 ## Deploy
 Setting to deploy webhooks on Heroku.
 
