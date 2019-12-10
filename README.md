@@ -97,12 +97,14 @@ The initial state is set to `user`.
 		* Reply: "確認右下角連線圖示" + 2 buttons["紅色叉叉", "黃色驚嘆號"]
 * after_register
 	* Input: "已註冊"
-		* State: 
-		* Reply: 
-	* Input: 
-		* State: 
-		* Reply:
-	* Input:
+		* State: "already_register"
+		* Reply: "確認右下角連線圖示" + 2 buttons["紅色叉叉", "黃色驚嘆號"]
+	* Input: "未註冊"
+		* State: "not_register"
+		* Reply: "請至宿網管理系統註冊" + 2 buttons["連線成功", "仍無法連線"]
+	* Input: "網孔已被註冊"
+		* State: "occupied"
+		* Reply: "請確認是否為室友註冊" + 2 buttons["是", "否"]
 * use_router
 	* Input: "連線成功"
 		* State: final
