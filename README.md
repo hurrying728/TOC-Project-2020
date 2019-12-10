@@ -87,11 +87,29 @@ The initial state is set to `user`.
 		* Reply: "請選擇連接宿網之方式" + 2 buttons["使用分享器", "無使用分享器"]
 	* Input: "已開始註冊宿網"
 		* State: after_register
-		* Reply: "" + 2 buttons["", ""]
+		* Reply: "選擇註冊情況" + 3 buttons["已註冊", "未註冊", "網孔已被註冊"]
 * before_register
 	* Input: "使用分享器"
 		* State: use_router
 		* Reply: "請確認分享器設定" + 2 buttons["連線成功", "仍無法連線"]
+	* Input: "無使用分享器"
+		* State: not_use_router
+		* Reply: "確認右下角連線圖示" + 2 buttons["紅色叉叉", "黃色驚嘆號"]
+* after_register
+	* Input: "已註冊"
+		* State: 
+		* Reply: 
+	* Input: 
+		* State: 
+		* Reply:
+	* Input:
+* use_router
+	* Input: "連線成功"
+		* State: final
+		* Reply: "感謝您的使用"
+	* Input: "仍無法連線"
+		* State: call
+		* Reply: "轉由專人服務"
 
 ## Deploy
 Setting to deploy webhooks on Heroku.
